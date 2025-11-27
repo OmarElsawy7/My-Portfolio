@@ -22,14 +22,39 @@ body.light-mode {
 }
 
 body {
+    /* خلينا المسافة من فوق 0 عشان يلزق */
+    padding: 0 20px 20px 20px; 
+    /* باقي الكود زي ما هو */
     background: var(--bg);
-    color: var(--text-main); /* دي مهمة جداً عشان اللون يتغير */
-    transition: background 0.3s ease, color 0.3s ease; /* نعومة التحويل */
-    /* باقي تنسيقات الـ body بتاعتك القديمة سيبها هنا عادي */
-    margin: 0;
+    color: var(--text-main);
     font-family: "Poppins", sans-serif;
-    padding: 28px;
+    transition: background 0.3s, color 0.3s;
+    margin: 0;
+
+    
 }
+
+
+.page {
+    position: relative;
+    
+    /* 1. إلغاء الحد الأقصى للعرض نهائياً */
+    max-width: none !important; 
+    
+    /* 2. معادلة حسابية: العرض 100% ناقص 90 بيكسل (بتوع الشريط الجانبي) */
+    width: calc(100% - 90px); 
+    
+    /* 3. إزاحة من الشمال عشان نبعد عن الشريط الجانبي */
+    margin-left: 80px; 
+    
+    /* 4. مسافة صغيرة من فوق */
+    margin-top: 20px; 
+    
+    /* مفيش هوامش يمين أو أوتوماتيك */
+    margin-right: 10px; 
+}
+
+
 
 /* تنسيق إضافي عشان النصوص جوة الكروت تبان في الأبيض */
 body.light-mode .project-detailed, 
