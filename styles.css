@@ -1,25 +1,52 @@
 :root {
+    /* تعريف متغير للون الخط عشان يتغير معانا */
+    --text-main: #e6eef8; 
+    /* باقي المتغيرات القديمة بتاعتك زي ما هي */
     --bg: #0b0f1a;
     --panel: #0f1724;
     --muted: #9aa7b8;
-    --accent: #38bdf8; /* light blue */
+    --accent: #38bdf8;
     --card: #0f172b;
     --glass: rgba(255, 255, 255, 0.03);
 }
 
-* {
-    box-sizing: border-box;
+/* ألوان الوضع الفاتح (Light Mode) */
+body.light-mode {
+    --bg: #ffffff;           /* خلفية بيضاء */
+    --panel: #f3f4f6;        /* بانل رصاصي فاتح */
+    --card: #ffffff;         /* الكروت بيضاء */
+    --muted: #475569;        /* الخط الثانوي غامق */
+    --accent: #0284c7;       /* أزرق أغمق عشان يبان */
+    --text-main: #0f172a;    /* الخط الأساسي أسود */
+    --glass: rgba(0, 0, 0, 0.05);
 }
 
 body {
-    margin: 0;
-    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     background: var(--bg);
-    color: #e6eef8;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    color: var(--text-main); /* دي مهمة جداً عشان اللون يتغير */
+    transition: background 0.3s ease, color 0.3s ease; /* نعومة التحويل */
+    /* باقي تنسيقات الـ body بتاعتك القديمة سيبها هنا عادي */
+    margin: 0;
+    font-family: "Poppins", sans-serif;
     padding: 28px;
 }
+
+/* تنسيق إضافي عشان النصوص جوة الكروت تبان في الأبيض */
+body.light-mode .project-detailed, 
+body.light-mode .hero {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+}
+body.light-mode .name, 
+body.light-mode h3, 
+body.light-mode h4, 
+body.light-mode h5 {
+    color: #0f172a; /* العناوين تبقى سوداء */
+}
+
+
+
+
 
 /* Vertical social (left) */
 .social-vertical {
@@ -80,6 +107,33 @@ body {
     letter-spacing: -0.4px;
     color: #ffffff;
 }
+
+/*------------------------
+
+/* Project Images */
+/* Project Images */
+.project-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 14px 0;
+}
+
+.project-images img {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease;
+}
+
+.project-images img:hover {
+    transform: scale(1.05);
+}
+
+
+/*------------------------*/
 
 .role {
     margin: 0 0 16px 0;
@@ -262,6 +316,15 @@ body {
     vertical-align: top;
 }
 
+.project-detailed h5 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--accent);
+    letter-spacing: -0.4px;
+    display: inline-block;
+    vertical-align: top;
+}
+
 .project-header {
     display: flex;
     align-items: flex-start;
@@ -358,4 +421,99 @@ body {
     .project-buttons {
     margin-top: 18px;
 }
+}
+
+
+
+/* ==================================================
+   إصلاح اختفاء الكلام في الوضع الفاتح (Light Mode Fixes)
+   ================================================== */
+
+/* 1. إجبار العناوين والأسماء إنها تبقى غامقة */
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4,
+body.light-mode h5,
+body.light-mode h6,
+body.light-mode .name,
+body.light-mode .category-title, /* ده اللي مختفي في السكرين شوت */
+body.light-mode strong {
+    color: #0f172a !important; /* لون كحلي غامق جداً */
+}
+
+/* 2. إجبار النصوص الفرعية والوصف إنها تبقى رصاصي غامق */
+body.light-mode p,
+body.light-mode .project-description,
+body.light-mode .category-items,
+body.light-mode .role,
+body.light-mode li {
+    color: #334155 !important;
+}
+
+/* 3. تحسين شكل حدود الكروت في الأبيض عشان تبان */
+body.light-mode .project-detailed,
+body.light-mode .hero,
+body.light-mode .objective,
+body.light-mode .tech-category {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0; /* حدود رصاصي فاتح */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* 4. تعديل لون خلفية الفئات (Backend/Frontend) في الأبيض */
+body.light-mode .tech-category {
+    background: #f1f5f9 !important; /* رصاصي فاتح جداً بدل الشفاف */
+}
+
+
+
+
+/* ==================================================
+   تحسين شكل "التعليم" و "المهارات" في الوضع الفاتح
+   ================================================== */
+
+/* 1. تظبيط بوكس التعليم (Education) */
+body.light-mode .meta {
+    background-color: #f1f5f9;      /* لون رصاصي فاتح جداً للخلفية */
+    padding: 15px 20px;             /* مسافات داخلية */
+    border-radius: 12px;            /* حواف ناعمة */
+    border: 1px solid #cbd5e1;      /* برواز خفيف */
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* ظل خفيف */
+}
+
+/* تلوين كلمة Education */
+body.light-mode .meta strong {
+    color: #0284c7;                 /* لون أزرق مميز */
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* 2. تظبيط شكل المهارات (Skills Tags) */
+body.light-mode .skills li {
+    background-color: #e0f2fe !important; /* خلفية لبني فاتحة */
+    color: #0369a1 !important;            /* كلام أزرق غامق */
+    border: 1px solid #bae6fd !important; /* حدود زرقاء */
+    padding: 8px 16px;                    /* تكبير حجم الزرار */
+    border-radius: 50px;                  /* يخليها بيضاوية (شكل كبسولة) */
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* عند مرور الماوس على المهارات */
+body.light-mode .skills li:hover {
+    background-color: #0284c7 !important; /* تتحول لأزرق غامق */
+    color: #ffffff !important;            /* الكلام يبيض */
+    transform: translateY(-2px);          /* تطلع لفوق سنة */
+}
+
+/* تظبيط المسافات بين المهارات */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* مسافة بين كل مهارة والتانية */
+    margin-top: 15px;
 }
